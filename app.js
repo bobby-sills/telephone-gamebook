@@ -54,6 +54,7 @@ app.post('/stories/:storyID/:sectionID', (request, response) => {
   // Check if this is an ending
   if (section.is_ending) {
     // No choices - redirect back to main menu
+    twiml.pause({ length: 2 });
     twiml.redirect('/voice');
   } else {
     // Create gather for user choices
