@@ -20,7 +20,7 @@ app.post('/voice', (request, response) => {
   });
   optionText = [];
   for (let i = 0; i < stories.length && i < 9; i++) {
-    optionText.push(`Press ${i + 1} to begin the story titled ${stories[i].title}. `);
+    optionText.push(`Press ${i + 1} to begin the story titled the ${stories[i].title}. `);
   }
   gather.say({ rate: 'slow' }, `Welcome to the telephone game book. ${optionText.join('')}`);
 
