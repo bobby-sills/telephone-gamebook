@@ -30,6 +30,10 @@ h3 {
   margin-top: 0;
 }
 
+main p {
+  color: var(--fg3);
+}
+
 nav {
   display: flex;
   justify-content: center;
