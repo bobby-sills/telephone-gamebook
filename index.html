@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Telephone Gamebook</title>
+  <link rel="icon" type="image/png" href="assets/favicon-dark.png">
+  <link href="css/style.css" rel="stylesheet">
+  <script>
+    // Load theme immediately to prevent flash
+    (function() {
+      const savedTheme = localStorage.getItem('theme');
+      let theme;
+      
+      if (savedTheme) {
+        theme = savedTheme;
+      } else {
+        theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      }
+      
+      document.documentElement.setAttribute('data-theme', theme);
+      
+      // Update favicon
+      const favicon = document.querySelector('link[rel="icon"]');
+      if (favicon) {
+        favicon.href = theme === 'dark' ? 'assets/favicon-dark.png' : 'assets/favicon-light.png';
+      }
+    })();
+  </script>
+  </head>
+  <body>
+
+    <main>
+      <h1><a href="tel:+14195574228">+1 (419) 557-4228</a></h1>
+      <h4>Click to call the telephone gamebook</h4>
+    </main>
+
+    <footer>
+      <a href="https://bobbysills.dev" target="_blank">bobbysills.dev</a>
+    </footer>
+
+  </body>
+</html>

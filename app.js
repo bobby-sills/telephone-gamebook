@@ -50,12 +50,13 @@ app.post('/stories/:storyID/:sectionID', (request, response) => {
 
   // Say the section text
   twiml.say({ rate: 'slow' }, section.text);
+  twiml.pause({ length: 1 });
 
   // Check if this is an ending
   if (section.is_ending) {
     // No choices - redirect back to main menu
-    twiml.pause({ length: 2 });
-    twiml.redirect('/voice');
+    twiml.pause({ length: 3 });
+    twiml.hangup();
   } else {
     // Create gather for user choices
     const gather = twiml.gather({
