@@ -98,6 +98,12 @@ app.post('/stories/:storyID/:sectionID/choice', (request, response) => {
   response.send(twiml.toString());
 });
 
-const PORT = process.env.PORT || 3000;
-console.log(`Twilio Client app HTTP server running on port ${PORT}`);
-app.listen(PORT);
+// Export the Express app for Vercel serverless functions
+module.exports = app;
+
+// For local development, start the server if not in production
+if (process.env.NODE_ENV !== 'production') {
+  const PORT = process.env.PORT || 3000;
+  console.log(`Twilio Client app HTTP server running on port ${PORT}`);
+  app.listen(PORT);
+}

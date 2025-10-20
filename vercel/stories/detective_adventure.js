@@ -1581,4 +1581,3 @@ const jadeserpentCase = {
 };
 
 module.exports = jadeserpentCase;
-

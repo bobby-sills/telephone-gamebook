@@ -6,16 +6,38 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 This is a telephone-based interactive gamebook powered by Twilio. Users call a phone number and navigate through branching story narratives using their phone's keypad.
 
+## Project Structure
+
+```
+telephone-gamebook/
+├── index.html          # GitHub Pages website (root)
+├── css/                # Website styles
+├── assets/             # Website assets
+└── vercel/             # Twilio backend (deployed to Vercel)
+    ├── app.js          # Express application
+    ├── stories.js      # Story imports
+    ├── stories/        # Story content files
+    ├── package.json    # Node dependencies
+    ├── vercel.json     # Vercel configuration
+    └── .vercelignore   # Vercel deployment exclusions
+```
+
 ## Technology Stack
 
 - **Runtime**: Node.js
 - **Framework**: Express 5.x
 - **Telephony**: Twilio (TwiML for voice responses)
 - **Dependencies**: dotenv for environment variables
+- **Hosting**: Vercel (backend), GitHub Pages (website)
 
 ## Running the Application
 
+### Local Development
+
 ```bash
+# Navigate to the vercel directory
+cd vercel
+
 # Install dependencies
 npm install
 
@@ -24,6 +46,32 @@ node app.js
 ```
 
 The server expects Twilio webhook requests and must be accessible via a public URL (use ngrok or similar for local development).
+
+### Deployment to Vercel
+
+This project is configured for deployment on Vercel's free tier, which provides near-instant cold starts ideal for Twilio webhooks:
+
+```bash
+# Install Vercel CLI (if not already installed)
+npm install -g vercel
+
+# Navigate to the vercel directory
+cd vercel
+
+# Deploy to Vercel
+vercel
+
+# For production deployment
+vercel --prod
+```
+
+**Configuration files (in `/vercel` directory):**
+- `vercel.json` - Routes all requests to the Express app as a serverless function
+- `.vercelignore` - Excludes unnecessary files from deployment
+
+**After deployment:**
+1. Copy your Vercel deployment URL (e.g., `https://your-project.vercel.app`)
+2. Configure your Twilio phone number's voice webhook to `https://your-project.vercel.app/voice` (POST method)
 
 ## Architecture
 
@@ -57,9 +105,9 @@ Stories are modular objects defined in the `stories/` directory with the followi
 
 ### Adding New Stories
 
-1. Create a new file in `stories/` directory (e.g., `stories/mystery_manor.js`)
+1. Create a new file in `vercel/stories/` directory (e.g., `vercel/stories/mystery_manor.js`)
 2. Export a story object following the schema above
-3. Import and add to the `stories` array in `stories.js`
+3. Import and add to the `stories` array in `vercel/stories.js`
 
 The main menu automatically adapts to support up to 9 stories (numbered 1-9 on the phone keypad).
 
